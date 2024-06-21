@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Importa o Firebase core
 import 'package:provider/provider.dart'; // Importa o Provider para gerenciamento de estado
 import 'login_screen.dart'; // Importa a tela de login
-import 'register_screen.dart'; // Importa a tela de registro
+import 'register_screen.dart'; // Importa a tela de registo
 import 'game_screen.dart'; // Importa a tela do jogo
 import 'score_screen.dart'; // Importa a tela de pontuação
 import 'ranking_screen.dart'; // Importa a tela de ranking
@@ -30,13 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IPv4 Educational game', // Título da aplicação
+      title: 'IPv4 Educational Game', // Título da aplicação
       theme: ThemeData(
         primarySwatch: Colors.purple, // Define a cor primária da aplicação
       ),
       home: Consumer<AuthService>(
         builder: (context, authService, _) {
-          // Verifica se o usuário está autenticado
+          // Verifica se o utilizador está autenticado
           if (authService.currentUser != null) {
             return GameScreen(); // Se estiver autenticado, mostra a tela do jogo
           } else {
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         // Define as rotas da aplicação
-        '/register': (context) => RegisterScreen(), // Rota para a tela de registro
+        '/register': (context) => RegisterScreen(), // Rota para a tela de registo
         '/game': (context) => GameScreen(), // Rota para a tela do jogo
         '/score': (context) => ScoreScreen(), // Rota para a tela de pontuação
         '/ranking': (context) => RankingScreen(), // Rota para a tela de ranking

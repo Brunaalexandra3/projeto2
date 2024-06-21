@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Importa o Provider para gerenciamento de estado
+import 'package:provider/provider.dart'; // Importa o Provider para gestão de estado
 import 'question_model.dart'; // Importa o modelo de dados da questão
 import 'game_service.dart'; // Importa o serviço do jogo
 import 'auth_service.dart'; // Importa o serviço de autenticação
 import 'custom_button.dart'; // Importa o componente personalizado para botões
 
-// Tela principal do jogo
+// Ecrã principal do jogo
 class GameScreen extends StatefulWidget {
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -14,15 +14,15 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   List<Question> _questions = []; // Lista de perguntas
   int _currentQuestionIndex = 0; // Índice da pergunta atual
-  int _score = 0; // Pontuação do usuário
+  int _score = 0; // Pontuação do utilizador
   String _selectedDifficulty = 'Fácil'; // Dificuldade selecionada
   String? _feedbackMessage; // Mensagem de feedback após resposta
 
   @override
   void initState() {
     super.initState();
-    _loadQuestions(); // Carrega as perguntas ao iniciar a tela
-    _loadUserScore(); // Carrega a pontuação do usuário ao iniciar a tela
+    _loadQuestions(); // Carrega as perguntas ao iniciar o ecrã
+    _loadUserScore(); // Carrega a pontuação do utilizador ao iniciar o ecrã
   }
 
   // Carrega as perguntas com base na dificuldade selecionada
@@ -34,13 +34,13 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  // Carrega a pontuação do usuário atual
+  // Carrega a pontuação do utilizador atual
   void _loadUserScore() {
     final authService = Provider.of<AuthService>(context, listen: false);
     final gameService = Provider.of<GameService>(context, listen: false);
     final currentUser = authService.currentUser;
 
-    // Se o usuário está autenticado, carrega a pontuação
+    // Se o utilizador está autenticado, carrega a pontuação
     if (currentUser != null) {
       gameService.getUserScore(currentUser.uid).then((userScore) {
         setState(() {
@@ -50,20 +50,20 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
-  // Verifica a resposta do usuário e atualiza a pontuação
+  // Verifica a resposta do utilizador e atualiza a pontuação
   void _checkAnswer(String answer) {
     bool isCorrect = _questions[_currentQuestionIndex].isCorrect(answer);
     int points = _getPoints(isCorrect);
 
     setState(() {
       _score += points; // Atualiza a pontuação
-      _feedbackMessage = isCorrect ? 'Correct! +${points} points' : 'Incorrect! ${points} points'; // Define a mensagem de feedback
+      _feedbackMessage = isCorrect ? 'Correto! +${points} pontos' : 'Incorreto! ${points} pontos'; // Define a mensagem de feedback
     });
 
     final authService = Provider.of<AuthService>(context, listen: false);
     final currentUser = authService.currentUser;
 
-    // Se o usuário está autenticado, salva a pontuação
+    // Se o utilizador está autenticado, guarda a pontuação
     if (currentUser != null) {
       Provider.of<GameService>(context, listen: false).saveScore(currentUser.uid, _score);
     }
@@ -76,7 +76,7 @@ class _GameScreenState extends State<GameScreen> {
           _feedbackMessage = null; // Reseta a mensagem de feedback
         });
       } else {
-        Navigator.pushNamed(context, '/score', arguments: _score); // Navega para a tela de pontuação
+        Navigator.pushNamed(context, '/score', arguments: _score); // Navega para o ecrã de pontuação
       }
     });
   }
@@ -109,14 +109,14 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('IPv4 Educational game'), // Título da barra de aplicativos
+        title: Text('Jogo Educativo IPv4'), // Título da barra de aplicações
         actions: [
           // Botão de logout
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
               Provider.of<AuthService>(context, listen: false).signOut();
-              Navigator.pushReplacementNamed(context, '/login'); // Navega para a tela de login
+              Navigator.pushReplacementNamed(context, '/login'); // Navega para o ecrã de login
             },
           ),
         ],
@@ -128,7 +128,7 @@ class _GameScreenState extends State<GameScreen> {
           children: [
             // Exibe a pergunta atual e o total de perguntas
             Text(
-              'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+              'Pergunta ${_currentQuestionIndex + 1}/${_questions.length}',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20), // Espaçamento vertical
@@ -166,7 +166,7 @@ class _GameScreenState extends State<GameScreen> {
                   _feedbackMessage!,
                   style: TextStyle(
                     fontSize: 18,
-                    color: _feedbackMessage!.startsWith('Correct') ? Colors.green : Colors.red,
+                    color: _feedbackMessage!.startsWith('Correto') ? Colors.green : Colors.red,
                   ),
                 ),
               ),
@@ -174,7 +174,7 @@ class _GameScreenState extends State<GameScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Text(
-                'Score: $_score',
+                'Pontuação: $_score',
                 style: TextStyle(fontSize: 18),
               ),
             ),

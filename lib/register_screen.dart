@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'auth_service.dart';  // Serviço para autenticação de usuário
+import 'auth_service.dart';  // Serviço para autenticação de utilizador
 import 'custom_textfield.dart';  // Componente personalizado para campos de texto
-import 'custom_button.dart';  // Componente personalizado para botoes
+import 'custom_button.dart';  // Componente personalizado para botões
 
-// Tela de registro de usuário
+// Tela de registo de utilizador
 class RegisterScreen extends StatelessWidget {
   // Controladores para os campos de email e senha
   final TextEditingController emailController = TextEditingController();
@@ -14,7 +14,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register')), // Barra de aplicativo com título
+      appBar: AppBar(title: Text('Registo')), // Barra de aplicação com título
       body: Padding(
         padding: const EdgeInsets.all(16.0), // Espaçamento ao redor do corpo
         child: Form(
@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
                 validator: (value) {
                   // Validação do campo de email
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu email';
+                    return 'Por favor, insira o seu email';
                   }
                   // Verifica se o email está no formato correto
                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
@@ -45,22 +45,22 @@ class RegisterScreen extends StatelessWidget {
                 validator: (value) {
                   // Validação do campo de senha
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira sua password';
+                    return 'Por favor, insira a sua password';
                   }
-                  // Verifica se a senha tem pelo menos 6 caracteres
+                  // Verifica se a password tem pelo menos 6 caracteres
                   if (value.length < 6) {
                     return 'A password deve ter pelo menos 6 caracteres';
                   }
                   return null;
                 },
               ),
-              // Botão personalizado para registro
+              // Botão personalizado para registo
               CustomButton(
-                text: 'Register',
+                text: 'Registo',
                 onPressed: () {
                   // Verifica se o formulário é válido
                   if (_formKey.currentState!.validate()) {
-                    // Chama o método de registro do serviço de autenticação
+                    // Chama o método de registo do serviço de autenticação
                     Provider.of<AuthService>(context, listen: false).signUp(
                       emailController.text,
                       passwordController.text,

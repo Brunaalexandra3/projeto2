@@ -4,7 +4,7 @@ import 'auth_service.dart'; // Importa o serviço de autenticação
 import 'custom_textfield.dart'; // Importa o componente personalizado para campos de texto
 import 'custom_button.dart'; // Importa o componente personalizado para botões
 
-// Tela de login do usuário
+// Tela de login do utilizador
 class LoginScreen extends StatelessWidget {
   // Controladores para os campos de email e senha
   final TextEditingController emailController = TextEditingController();
@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')), // Barra de aplicativo com título
+      appBar: AppBar(title: Text('Login')), // Barra de aplicação com título
       body: Padding(
         padding: const EdgeInsets.all(16.0), // Espaçamento ao redor do corpo
         child: Form(
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                 validator: (value) {
                   // Validação do campo de email
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu email';
+                    return 'Por favor, insira o seu email';
                   }
                   // Verifica se o email está no formato correto
                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                 validator: (value) {
                   // Validação do campo de senha
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira sua password';
+                    return 'Por favor, insira a sua password';
                   }
                   // Verifica se a senha tem pelo menos 6 caracteres
                   if (value.length < 6) {
@@ -68,19 +68,19 @@ class LoginScreen extends StatelessWidget {
                   }
                 },
               ),
-              // Botão de texto para navegar para a tela de registro
+              // Botão de texto para navegar para a tela de registo
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/register');
                 },
-                child: Text('Register'),
+                child: Text('Registo'),
               ),
               // Botão de texto para visualizar o ranking
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/ranking');
                 },
-                child: Text('View Ranking'),
+                child: Text('Ver Ranking'),
               ),
             ],
           ),
