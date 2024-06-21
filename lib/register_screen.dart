@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_service.dart';  // Serviço para autenticação de usuário
 import 'custom_textfield.dart';  // Componente personalizado para campos de texto
-import 'custom_button.dart';  // Componente personalizado para botões
+import 'custom_button.dart';  // Componente personalizado para botoes
 
 // Tela de registro de usuário
 class RegisterScreen extends StatelessWidget {
